@@ -1,0 +1,46 @@
+table{
+    margin: 10% auto;
+    border: 1px solid black;
+    border-spacing: 0px;
+}
+
+td{
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border: 1px solid black;
+    transition: background-color linear 0.15s;
+    background-position: center;
+
+}
+td:hover{
+    background-color: bisque;
+    transition: background-color linear 0.15s;
+}
+
+/*масти*/
+.club{
+    background-image: url("../images/club.png");
+    background-repeat: no-repeat;
+}
+
+.diamond{
+    background-image: url("../images/diamond.png");
+    background-repeat: no-repeat;
+}
+
+.heart{
+    background-image: url("../images/heart.png");
+    background-repeat: no-repeat;
+}
+
+.spade{
+    background-image: url("../images/spade.png");
+    background-repeat: no-repeat;
+}
+
+.deleted{
+    background-image: none;
+    background-color: #ffcfcf;
+    transition: background-color linear 0.8s;
+}
