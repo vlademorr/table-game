@@ -9,34 +9,33 @@ import _ from "lodash";
 const CardSuit = function(name, isDeleted = false){
     this.name = name;
     this.isDeleted = isDeleted;
+};
 
-    // метод прототипа конструктора, который удаляет элемент и взывает удаление соседних элементов такой же масти.
-    this.delete = (rowId, columnId, tableElState) => {
-        const cellNameSuit = tableElState[rowId][columnId].name;
+// Добавляем метод в прототип конструктора который удаляет элемент и вызывает удаление соседних элементов такой же масти.
+CardSuit.prototype.delete = (rowId, columnId, tableElState) => {
+    const cellNameSuit = tableElState[rowId][columnId].name;
+    tableElState[rowId][columnId].isDeleted = true;
 
-        this.isDeleted = true;
-        // соседние строчки на проверку.
-        const siblings = [
-            [rowId, columnId + 1],
-            [rowId, columnId - 1],
-            [rowId + 1, columnId],
-            [rowId - 1, columnId]
-        ];
+    // соседние строчки на проверку.
+    const siblings = [
+        [rowId, columnId + 1],
+        [rowId, columnId - 1],
+        [rowId + 1, columnId],
+        [rowId - 1, columnId]
+    ];
 
-        siblings.forEach((sibling) => {
-            const [rowNumb, columnNumb] = sibling;
+    siblings.forEach((sibling) => {
+        const [rowNumb, columnNumb] = sibling;
 
-            if (
-                tableElState[rowNumb]
-                && tableElState[rowNumb][columnNumb]
-                && !tableElState[rowNumb][columnNumb].isDeleted
-                && tableElState[rowNumb][columnNumb].name === cellNameSuit
-            ) {
-                tableElState[rowNumb][columnNumb].delete(rowNumb, columnNumb, tableElState);
-            }
-        });
-    };
-
+        if (
+            tableElState[rowNumb]
+            && tableElState[rowNumb][columnNumb]
+            && !tableElState[rowNumb][columnNumb].isDeleted
+            && tableElState[rowNumb][columnNumb].name === cellNameSuit
+        ) {
+            tableElState[rowNumb][columnNumb].delete(rowNumb, columnNumb, tableElState);
+        }
+    });
 };
 
 // Создает массив объектов с мастями и с помощью "shuffle" рандомит элементы массива.
